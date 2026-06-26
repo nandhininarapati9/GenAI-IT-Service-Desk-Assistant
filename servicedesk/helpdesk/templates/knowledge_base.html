@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow-lg border-0">
+
+<div class="card-body">
+
+<div class="text-center mb-4">
+
+    <h1 class="fw-bold mb-2">
+        📚 Knowledge Base
+    </h1>
+
+    <p class="text-muted">
+        Browse IT support solutions and troubleshooting guides.
+    </p>
+
+    <span class="badge bg-primary fs-6">
+        {{ articles|length }} Articles
+    </span>
+
+</div>
+
+
+
+    <hr>
+
+    {% if articles %}
+
+    <div class="table-responsive">
+
+        <table
+            class="table table-hover align-middle w-100"
+            style="table-layout: fixed;"
+        >
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th style="width:25%;">Title</th>
+                    <th style="width:15%;">Category</th>
+                    <th style="width:60%;">Solution Steps</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for article in articles %}
+
+                <tr>
+
+                    <td>
+                        <strong class="fs-6">
+                            {{ article.title }}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        {% if article.category == "Network" %}
+                            <span class="badge bg-primary">
+                                🌐 {{ article.category }}
+                            </span>
+
+                        {% elif article.category == "Software" %}
+                            <span class="badge bg-success">
+                                💻 {{ article.category }}
+                            </span>
+
+                        {% elif article.category == "Hardware" %}
+                            <span class="badge bg-warning text-dark">
+                                🖨️ {{ article.category }}
+                            </span>
+
+                        {% else %}
+                            <span class="badge bg-secondary">
+                                {{ article.category }}
+                            </span>
+                        {% endif %}
+
+                    </td>
+
+                    <td style="white-space: pre-line;">
+
+                        {{ article.formatted_content|safe }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info text-center">
+
+        <h4>📭 No Knowledge Articles Found</h4>
+
+        <p class="mb-0">
+            Add articles from Django Admin to build your knowledge base.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow-lg border-0">
+
+<div class="card-body p-4">
+
+    <h2 class="mb-4">
+        🔍 Search Knowledge Base
+    </h2>
+
+    <form method="GET">
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="q"
+                class="form-control"
+                placeholder="Search for VPN, Outlook, Printer..."
+                value="{{ query|default:'' }}">
+
+            <button
+                class="btn btn-primary"
+                type="submit">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <hr>
+
+    {% if query %}
+
+        {% if articles %}
+
+            <h5 class="mb-3">
+                Search Results for:
+                <span class="text-primary">
+                    "{{ query }}"
+                </span>
+            </h5>
+
+            {% for article in articles %}
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <h4>
+                        {{ article.title }}
+                    </h4>
+
+                    <p>
+
+                        <strong>
+                            Category:
+                        </strong>
+
+                        <span class="badge bg-primary">
+                            {{ article.category }}
+                        </span>
+
+                    </p>
+
+                    <p>
+                        {{ article.content }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="alert alert-danger mt-4">
+
+                <h4>
+                    ❌ No Solution Found
+                </h4>
+
+                <p>
+                    No knowledge base article matches your search.
+                </p>
+
+                <p>
+                    Try another keyword, ask the AI Assistant,
+                    or create an incident.
+                </p>
+
+                <hr>
+
+                <a
+                    href="/assistant/"
+                    class="btn btn-primary">
+
+                    🤖 Ask AI Assistant
+
+                </a>
+
+                <a
+                    href="/create/"
+                    class="btn btn-danger">
+
+                    🎫 Create Incident
+
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            <h5>
+                📚 Knowledge Base Search
+            </h5>
+
+            <p>
+                Enter a keyword above to search for troubleshooting
+                articles and solutions.
+            </p>
+
+            <p>
+                Examples:
+            </p>
+
+            <ul>
+                <li>VPN</li>
+                <li>Outlook</li>
+                <li>Printer</li>
+            </ul>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+</div>
+
+{% endblock %}

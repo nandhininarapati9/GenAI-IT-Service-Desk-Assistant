@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">Incident Dashboard</h1>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Total Incidents</h5>
+                <h2>{{ total_incidents }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Open</h5>
+                <h2>{{ open_incidents }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Solved</h5>
+                <h2>{{ solved_incidents }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5>Knowledge Articles</h5>
+                <h2>{{ total_articles }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<a href="/create/" class="btn btn-primary mb-4">
+    Create Incident
+</a>
+
+<table class="table table-striped table-bordered bg-white">
+
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for incident in incidents %}
+
+        <tr>
+            <td>{{ incident.title }}</td>
+            <td>{{ incident.category }}</td>
+            <td>{{ incident.priority }}</td>
+            <td>{{ incident.status }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
